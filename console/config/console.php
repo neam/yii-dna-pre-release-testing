@@ -53,7 +53,7 @@ $consoleConfig = array(
             'class' => 'app.commands.DatabaseSchemaCommand',
         ),
         'mysqldump' => array(
-            'class' => 'vendor.crisu83.yii-consoletools.commands.MysqldumpCommand',
+            'class' => 'vendor.motin.yii-consoletools.commands.MysqldumpCommand',
             'basePath' => dirname(__DIR__) . '/..',
             'dumpPath' => '/db',
         ),
