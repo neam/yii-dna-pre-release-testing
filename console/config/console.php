@@ -69,9 +69,23 @@ $consoleConfig = array(
     ),
 );
 
-$config = $consoleConfig;
+$config = array();
 
-// Database config
-require $projectRoot . DIRECTORY_SEPARATOR . 'dna' . DIRECTORY_SEPARATOR . 'db' . DIRECTORY_SEPARATOR . 'config.inc.php';
+// Import the DNA classes and configuration into $config
+require($projectRoot . '/dna/dna-api-revisions/' . YII_DNA_REVISION . '/include.php');
 
-return $config;
+// create base console config from web configuration
+$consoleRelevantDnaConfig = array(
+    'name'       => $config['name'],
+    'language'   => $config['language'],
+    'aliases'    => $config['aliases'],
+    'import'     => $config['import'],
+    'components' => $config['components'],
+    'modules'    => $config['modules'],
+    'params'     => $config['params'],
+);
+
+// apply console config
+$consoleConfig = CMap::mergeArray($consoleRelevantDnaConfig, $consoleConfig);
+
+return $consoleConfig;

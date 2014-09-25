@@ -1,7 +1,7 @@
 <?php
 
 $approot = dirname(__FILE__);
-$root = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+$root = dirname(__FILE__) . '/../../../..';
 
 // include composer autoloader
 require_once("$root/vendor/autoload.php");

@@ -67,7 +67,7 @@ console/yiic databaseviewgenerator --connectionID=$connectionID itemTable
 
 if [ "$connectionID" != "dbTest" ]; then
 
-    $dna_path/db/shell-scripts/update-current-schema-dumps.sh
+    shell-scripts/update-current-schema-dumps.sh
 
 fi
 
