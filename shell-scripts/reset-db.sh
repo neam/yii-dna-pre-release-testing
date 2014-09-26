@@ -19,6 +19,10 @@ dna_path=../../../dna
 
 console/yiic databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
 
+# make app config available as shell variables
+php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh
+source /tmp/php-app-config.sh
+
 if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_HOST=$TEST_DB_HOST
     export DATABASE_PORT=$TEST_DB_PORT
