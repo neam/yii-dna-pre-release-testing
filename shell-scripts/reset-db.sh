@@ -19,20 +19,23 @@ dna_path=../../../dna
 
 console/yiic databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
 
+if [ "$connectionID" == "dbTest" ]; then
+    export DATABASE_HOST=$TEST_DB_HOST
+    export DATABASE_PORT=$TEST_DB_PORT
+    export DATABASE_USER=$TEST_DB_USER
+    export DATABASE_PASSWORD=$TEST_DB_PASSWORD
+    export DATABASE_NAME=$TEST_DB_NAME
+fi
+
 if [ "$DATA" == "user-generated" ]; then
 
     echo "===== Load the user-generated data associated with this commit ===="
 
-    $dna_path/db/shell-scripts/fetch-user-generated-data.sh
+    $script_path/fetch-user-generated-data.sh
 
-    # load mysql dump
-    # TODO fix what is causing the following command to crash (it is most likely the file size of > 1 MB)
-    #console/yiic databaseschema --connectionID=$connectionID loadSql --path=$dna_path/db/migration-base/user-generated/schema.sql
-    #console/yiic databaseschema --connectionID=$connectionID loadSql --path=$dna_path/db/migration-base/user-generated/data.sql
-
-    # TODO Remove this once the todo above has been fixed
-    mysql -A --host=$DB_HOST --port=$DB_PORT --user=$DB_USER --password=$DB_PASSWORD $DB_NAME < $dna_path/db/migration-base/user-generated/schema.sql
-    mysql -A --host=$DB_HOST --port=$DB_PORT --user=$DB_USER --password=$DB_PASSWORD $DB_NAME < $dna_path/db/migration-base/user-generated/data.sql
+    # load mysql dumps
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/user-generated/schema.sql
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/user-generated/data.sql
 
     # copy the downloaded data to the p3media folder
     rm -rf $dna_path/db/data/p3media/*
@@ -48,8 +51,9 @@ fi
 
 if [ "$DATA" == "clean-db" ]; then
 
-    console/yiic databaseschema --connectionID=$connectionID loadSql --path=$dna_path/db/migration-base/clean-db/schema.sql --verbose=0
-    console/yiic databaseschema --connectionID=$connectionID loadSql --path=$dna_path/db/migration-base/clean-db/data.sql --verbose=0
+    # load mysql dumps
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/clean-db/schema.sql
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/clean-db/data.sql
 
 fi
 
