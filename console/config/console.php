@@ -54,7 +54,7 @@ $consoleConfig = array(
         ),
         'mysqldump' => array(
             'class' => 'vendor.motin.yii-consoletools.commands.MysqldumpCommand',
-            'basePath' => dirname(__DIR__) . '/..',
+            'basePath' => $projectRoot,
             'dumpPath' => '/db',
         ),
         // dna-specific commands
