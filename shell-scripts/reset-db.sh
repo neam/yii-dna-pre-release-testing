@@ -15,7 +15,7 @@ fi
 set -o errexit
 
 cd $script_path/..
-dna_path=../../../dna
+dna_path=$(pwd)/../../../dna
 
 console/yiic databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
 
