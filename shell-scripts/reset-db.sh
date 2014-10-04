@@ -17,6 +17,10 @@ set -o errexit
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
 
+# workaround unknown bug that removes executable permission from all files
+chmod +x console/yiic
+chmod +x shell-scripts/*.sh
+
 console/yiic databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
 
 # make app config available as shell variables
