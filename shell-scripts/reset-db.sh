@@ -39,7 +39,7 @@ if [ "$DATA" == "user-generated" ]; then
 
     echo "===== Load the user-generated data associated with this commit ===="
 
-    $script_path/fetch-user-generated-data.sh
+    shell-scripts/fetch-user-generated-data.sh
 
     # load mysql dumps
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/user-generated/schema.sql
