@@ -8,8 +8,9 @@
 
 script_path=`dirname $0`
 cd $script_path/../
+dna_path=$(pwd)/../../../dna
 
-cp db/migration-base/user-generated/schema.sql db/migration-base/clean-db/schema.sql
+cp $dna_path/db/migration-base/user-generated/schema.sql $dna_path/db/migration-base/clean-db/schema.sql
 
 function cleanupdump {
 
@@ -18,7 +19,7 @@ function cleanupdump {
 
 }
 
-cleanupdump db/migration-base/clean-db/schema.sql
+cleanupdump $dna_path/db/migration-base/clean-db/schema.sql
 
 echo "Schema updated. Now remove migrations that are already applied"
 
