@@ -47,6 +47,7 @@ $consoleConfig = array(
         'fixture' => array(
             'class' => 'vendor.sumwai.yii-fixture-helper.FixtureHelperCommand',
             'defaultFixturePathAlias' => 'dna.fixtures',
+            'defaultModelPathAlias' => 'dna.models',
         ),
         // db commands
         'databaseschema' => array(
