@@ -15,3 +15,12 @@ User generated data is backed up to S3 by running a command specified in the rea
 The migrations-folder should at any time contain the migrations necessary to migrate (separately) the clean-db schema and the user-generated schema to the schema necessary for the current revision.
 
 This ensures that release-upgrades can be tested before actual releases.
+
+## FAQ
+
+### How are new migrations created?
+
+    vendor/neam/yii-dna-pre-release-testing/console/yiic migrate create migration_foo
+
+This puts the empty migration files in the common migrations dir. If you need a migration only for clean-db or only for user-generated you'll need to move it.
+
