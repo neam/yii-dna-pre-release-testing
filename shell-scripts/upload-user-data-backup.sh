@@ -10,10 +10,14 @@ script_path=`dirname $0`
 # Note: this script is tailored to be run on dokku deployments through sshcommand
 
 # cd to app root
-cd $script_path/../
+cd $script_path/..
+dna_path=$(pwd)/../../../dna
+
+# workaround unknown bug that removes executable permission from all files
+chmod +x console/yiic
 
 # configure s3cmd
-deploy/configure-s3cmd.sh
+bash ../yii-dna-deployment/configure-s3cmd.sh
 
 # make php binaries available
 export PATH="/app/vendor/php/bin/:$PATH"
@@ -25,17 +29,17 @@ FOLDER=ENV-$ENV
 
 FILEPATH=cms/$FOLDER/$DATETIME/schema.sql
 
-if [ -f db/migration-base/user-generated/schema.sql ] ; then
-    rm db/migration-base/user-generated/schema.sql
+if [ -f $dna_path/db/schema.sql ] ; then
+    rm $dna_path/db/schema.sql
 fi
-$script_path/../app/yiic mysqldump --dumpPath=db/migration-base/user-generated --dumpFile=schema.sql --data=false
-if [ ! -f db/migration-base/user-generated/schema.sql ] ; then
-    echo "The mysql dump is not found at the expected location: db/migration-base/user-generated/schema.sql"
+console/yiic mysqldump --dumpPath=dna/db --dumpFile=schema.sql --data=false
+if [ ! -f $dna_path/db/schema.sql ] ; then
+    echo "The mysql dump is not found at the expected location: db/schema.sql"
     exit 1
 fi
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put db/migration-base/user-generated/schema.sql "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 
-echo $FILEPATH > /app/db/migration-base/user-generated/schema.filepath
+echo $FILEPATH > $dna_path/db/schema.filepath
 echo "User generated db schema sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 echo "Set the contents of 'db/migration-base/user-generated/schema.filepath' to '$FILEPATH' in order to use this upload"
 
@@ -43,17 +47,17 @@ echo "Set the contents of 'db/migration-base/user-generated/schema.filepath' to 
 
 FILEPATH=cms/$FOLDER/$DATETIME/data.sql
 
-if [ -f db/migration-base/user-generated/data.sql ] ; then
-    rm db/migration-base/user-generated/data.sql
+if [ -f $dna_path/db/data.sql ] ; then
+    rm $dna_path/db/data.sql
 fi
-$script_path/../app/yiic mysqldump --dumpPath=db/migration-base/user-generated --dumpFile=data.sql --schema=false
-if [ ! -f db/migration-base/user-generated/data.sql ] ; then
-    echo "The mysql dump is not found at the expected location: db/migration-base/user-generated/data.sql"
+console/yiic mysqldump --dumpPath=dna/db --dumpFile=data.sql --schema=false
+if [ ! -f $dna_path/db/data.sql ] ; then
+    echo "The mysql dump is not found at the expected location: db/data.sql"
     exit 1
 fi
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put db/migration-base/user-generated/data.sql "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 
-echo $FILEPATH > /app/db/migration-base/user-generated/data.filepath
+echo $FILEPATH > $dna_path/db/data.filepath
 echo "User generated db data sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 echo "Set the contents of 'db/migration-base/user-generated/data.filepath' to '$FILEPATH' in order to use this upload"
 
@@ -61,8 +65,8 @@ echo "Set the contents of 'db/migration-base/user-generated/data.filepath' to '$
 
 FOLDERPATH=cms/$FOLDER/$DATETIME/media/
 
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $script_path/../app/data/p3media/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
-echo $FOLDERPATH > /app/db/migration-base/user-generated/media.folderpath
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $dna_path/db/data/p3media/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
+echo $FOLDERPATH > $dna_path/db/media.folderpath
 
 echo "User media uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 echo "Set the contents of 'db/migration-base/user-generated/media.folderpath' to '$FOLDERPATH' in order to use this upload"

@@ -8,7 +8,7 @@ set -o errexit
 
 script_path=`dirname $0`
 cd $script_path/..
-dna_path=../../../dna
+dna_path=$(pwd)/../../../dna
 
 if [ ! -f $dna_path/db/migration-base/user-generated/schema.sql ]; then
 
