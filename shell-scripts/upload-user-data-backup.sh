@@ -23,7 +23,7 @@ bash ../yii-dna-deployment/configure-s3cmd.sh
 export PATH="/app/vendor/php/bin/:$PATH"
 
 DATETIME=$(date +"%Y-%m-%d_%H%M%S")
-FOLDER=ENV-$ENV
+FOLDER=DATA-$DATA/ENV-$ENV
 
 # dump and upload schema sql
 
