@@ -67,7 +67,6 @@ FOLDERPATH=cms/$FOLDER/$DATETIME/media/
 
 s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $dna_path/db/data/p3media/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 echo $FOLDERPATH > $dna_path/db/media.folderpath
-
 echo "User media uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 echo "Set the contents of 'db/migration-base/user-generated/media.folderpath' to '$FOLDERPATH' in order to use this upload"
 
