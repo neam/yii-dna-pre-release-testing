@@ -10,7 +10,11 @@ script_path=`dirname $0`
 cd $script_path/../
 dna_path=$(pwd)/../../../dna
 
-cp $dna_path/db/migration-base/user-generated/schema.sql $dna_path/db/migration-base/clean-db/schema.sql
+if [ "$DATA" == "" ]; then
+    DATA=user-generated
+fi
+
+cp $dna_path/db/migration-base/$DATA/schema.sql $dna_path/db/migration-base/clean-db/schema.sql
 
 function cleanupdump {
 

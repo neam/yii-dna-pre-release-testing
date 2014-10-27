@@ -7,9 +7,8 @@ $projectRoot = $applicationDirectory . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SE
 $modulePaths = array();
 if (DATA == "clean-db") {
     $modulePaths['clean-db-only'] = 'dna.db.migrations.clean-db-only';
-}
-if (DATA == "user-generated") {
-    $modulePaths['user-generated-only'] = 'dna.db.migrations.user-generated-only';
+} else {
+    $modulePaths['user-generated-only'] = 'dna.db.migrations.' . DATA . '-only';
 }
 
 $consoleConfig = array(
@@ -77,13 +76,13 @@ require($projectRoot . '/dna/dna-api-revisions/' . YII_DNA_REVISION . '/include.
 
 // create base console config from web configuration
 $consoleRelevantDnaConfig = array(
-    'name'       => $config['name'],
-    'language'   => $config['language'],
-    'aliases'    => $config['aliases'],
-    'import'     => $config['import'],
+    'name' => $config['name'],
+    'language' => $config['language'],
+    'aliases' => $config['aliases'],
+    'import' => $config['import'],
     'components' => $config['components'],
-    'modules'    => $config['modules'],
-    'params'     => $config['params'],
+    'modules' => $config['modules'],
+    'params' => $config['params'],
 );
 
 // apply console config

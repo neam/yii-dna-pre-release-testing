@@ -35,22 +35,22 @@ if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_NAME=$TEST_DB_NAME
 fi
 
-if [ "$DATA" == "user-generated" ]; then
+if [ "$DATA" != "clean-db" ]; then
 
     echo "===== Load the user-generated data associated with this commit ===="
 
     shell-scripts/fetch-user-generated-data.sh
 
     # load mysql dumps
-    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/user-generated/schema.sql
-    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/user-generated/data.sql
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/schema.sql
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/data.sql
 
     # copy the downloaded data to the p3media folder
     rm -rf $dna_path/db/data/p3media/*
     # todo: find a way to ensure that previously uploaded media can be restored from, possible similar to below but that works more than once
     #mkdir .trashed-p3media-data
     #mv $dna_path/db/data/p3media/* .trashed-p3media-data/
-    cp -r $dna_path/db/migration-base/user-generated/media/* $dna_path/db/data/p3media/
+    cp -r $dna_path/db/migration-base/$DATA/media/* $dna_path/db/data/p3media/
 
     # make downloaded media directories owned and writable by the web server
     chown -R nobody: $dna_path/db/data/p3media/

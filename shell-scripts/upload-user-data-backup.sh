@@ -41,7 +41,7 @@ s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql "$
 
 echo $FILEPATH > $dna_path/db/schema.filepath
 echo "User generated db schema sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
-echo "Set the contents of 'db/migration-base/user-generated/schema.filepath' to '$FILEPATH' in order to use this upload"
+echo "Set the contents of 'db/migration-base/$DATA/schema.filepath' to '$FILEPATH' in order to use this upload"
 
 # dump and upload data sql
 
@@ -59,7 +59,7 @@ s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql "$US
 
 echo $FILEPATH > $dna_path/db/data.filepath
 echo "User generated db data sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
-echo "Set the contents of 'db/migration-base/user-generated/data.filepath' to '$FILEPATH' in order to use this upload"
+echo "Set the contents of 'db/migration-base/$DATA/data.filepath' to '$FILEPATH' in order to use this upload"
 
 # dump and upload user media
 
@@ -68,6 +68,6 @@ FOLDERPATH=cms/$FOLDER/$DATETIME/media/
 s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $dna_path/db/data/p3media/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 echo $FOLDERPATH > $dna_path/db/media.folderpath
 echo "User media uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
-echo "Set the contents of 'db/migration-base/user-generated/media.folderpath' to '$FOLDERPATH' in order to use this upload"
+echo "Set the contents of 'db/migration-base/$DATA/media.folderpath' to '$FOLDERPATH' in order to use this upload"
 
 exit 0
