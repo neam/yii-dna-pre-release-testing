@@ -43,7 +43,12 @@ if [ "$DATA" != "clean-db" ]; then
 
     # copy the downloaded data to the p3media folder
     rm -rf $dna_path/db/data/p3media/*
-    cp -r $dna_path/db/migration-base/$DATA/media/* $dna_path/db/data/p3media/
+    SOURCE_PATH=$dna_path/db/migration-base/$DATA/media
+    if [ "$(ls -A $SOURCE_PATH/)" ]; then
+        cp -r $SOURCE_PATH/* $dna_path/db/data/p3media/
+    else
+        echo "Warning: No media files found"
+    fi
 
     # make downloaded media directories owned and writable by the web server
     chown -R nobody: $dna_path/db/data/p3media/
