@@ -43,9 +43,6 @@ if [ "$DATA" != "clean-db" ]; then
 
     # copy the downloaded data to the p3media folder
     rm -rf $dna_path/db/data/p3media/*
-    # todo: find a way to ensure that previously uploaded media can be restored from, possible similar to below but that works more than once
-    #mkdir .trashed-p3media-data
-    #mv $dna_path/db/data/p3media/* .trashed-p3media-data/
     cp -r $dna_path/db/migration-base/$DATA/media/* $dna_path/db/data/p3media/
 
     # make downloaded media directories owned and writable by the web server
