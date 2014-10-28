@@ -13,9 +13,6 @@ script_path=`dirname $0`
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
 
-# workaround unknown bug that removes executable permission from all files
-chmod +x console/yiic
-
 # configure s3cmd
 bash ../yii-dna-deployment/configure-s3cmd.sh
 
