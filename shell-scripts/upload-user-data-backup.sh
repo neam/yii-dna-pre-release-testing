@@ -24,7 +24,7 @@ FOLDER=DATA-$DATA/ENV-$ENV
 
 # dump and upload schema sql
 
-FILEPATH=cms/$FOLDER/$DATETIME/schema.sql
+FILEPATH=$FOLDER/$DATETIME/schema.sql
 
 if [ -f $dna_path/db/schema.sql ] ; then
     rm $dna_path/db/schema.sql
@@ -42,7 +42,7 @@ echo "Set the contents of 'db/migration-base/$DATA/schema.filepath' to '$FILEPAT
 
 # dump and upload data sql
 
-FILEPATH=cms/$FOLDER/$DATETIME/data.sql
+FILEPATH=$FOLDER/$DATETIME/data.sql
 
 if [ -f $dna_path/db/data.sql ] ; then
     rm $dna_path/db/data.sql
@@ -60,7 +60,7 @@ echo "Set the contents of 'db/migration-base/$DATA/data.filepath' to '$FILEPATH'
 
 # dump and upload user media
 
-FOLDERPATH=cms/$FOLDER/$DATETIME/media/
+FOLDERPATH=$FOLDER/$DATETIME/media/
 
 s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $dna_path/db/data/p3media/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 echo $FOLDERPATH > $dna_path/db/media.folderpath
