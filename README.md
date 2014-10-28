@@ -20,7 +20,7 @@ This ensures that release-upgrades can be tested before actual releases.
 
 ### How are new migrations created?
 
-    vendor/neam/yii-dna-pre-release-testing/console/yiic migrate create migration_foo
+    vendor/bin/yii-dna-pre-release-testing-console migrate create migration_foo
 
 This puts the empty migration files in the common migrations dir. If you need a migration only for clean-db or only for user-generated you'll need to move it.
 

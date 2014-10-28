@@ -13,8 +13,8 @@ source /tmp/php-app-config.sh
 mysqldump -h$DATABASE_HOST -P$DATABASE_PORT -u$DATABASE_USER --password=$DATABASE_PASSWORD --no-create-info --skip-triggers --no-data --databases $DATABASE_NAME > $dna_path/db/migration-results/$DATA/create-db.sql
 
 # dump the current schema
-console/yiic mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/schema.sql --data=false --schema=true
-console/yiic mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/data.sql --data=true --schema=false --compact=false
+console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/schema.sql --data=false --schema=true
+console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/data.sql --data=true --schema=false --compact=false
 
 # perform some clean-up on the dump files so that it needs to be committed less often
 function cleanupdump {

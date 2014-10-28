@@ -29,7 +29,7 @@ FILEPATH=cms/$FOLDER/$DATETIME/schema.sql
 if [ -f $dna_path/db/schema.sql ] ; then
     rm $dna_path/db/schema.sql
 fi
-console/yiic mysqldump --dumpPath=dna/db --dumpFile=schema.sql --data=false
+console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=schema.sql --data=false
 if [ ! -f $dna_path/db/schema.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/schema.sql"
     exit 1
@@ -47,7 +47,7 @@ FILEPATH=cms/$FOLDER/$DATETIME/data.sql
 if [ -f $dna_path/db/data.sql ] ; then
     rm $dna_path/db/data.sql
 fi
-console/yiic mysqldump --dumpPath=dna/db --dumpFile=data.sql --schema=false
+console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=data.sql --schema=false
 if [ ! -f $dna_path/db/data.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/data.sql"
     exit 1

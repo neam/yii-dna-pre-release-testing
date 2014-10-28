@@ -17,7 +17,7 @@ set -o errexit
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
 
-console/yiic databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
+console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
 
 # make app config available as shell variables
 php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh
@@ -68,10 +68,10 @@ if [ "$DATA" == "" ]; then
 
 fi
 
-console/yiic fixture --connectionID=$connectionID load
-console/yiic migrate --connectionID=$connectionID --interactive=0 # > /dev/null
-console/yiic databaseviewgenerator --connectionID=$connectionID item
-console/yiic databaseviewgenerator --connectionID=$connectionID itemTable
+console/yii-dna-pre-release-testing-console fixture --connectionID=$connectionID load
+console/yii-dna-pre-release-testing-console migrate --connectionID=$connectionID --interactive=0 # > /dev/null
+console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID item
+console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID itemTable
 
 if [ "$connectionID" != "dbTest" ]; then
 
