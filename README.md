@@ -24,3 +24,12 @@ This ensures that release-upgrades can be tested before actual releases.
 
 This puts the empty migration files in the common migrations dir. If you need a migration only for clean-db or only for user-generated you'll need to move it.
 
+### How are new DATA profiles added?
+
+Deploy using DATA=clean-db, then upload the current current user-generated data to S3 under the name of the new DATA profile.
+
+Example:
+
+    export DATA=newprofile
+    ssh dokku@$DOKKU_HOST config:set $APPNAME DATA=$DATA
+    ssh dokku@$DOKKU_HOST run $APPNAME /app/vendor/neam/yii-dna-pre-release-testing/shell-scripts/upload-user-data-backup.sh
