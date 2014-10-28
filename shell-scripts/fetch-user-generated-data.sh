@@ -16,7 +16,6 @@ if [ ! -f $dna_path/db/migration-base/$DATA/schema.sql ]; then
 
     if [ -f $dna_path/db/migration-base/$DATA/schema.filepath ]; then
 
-        export USER_GENERATED_DATA_S3_BUCKET="s3://user-data-backups"
         export USER_GENERATED_DATA_FILEPATH=`cat $dna_path/db/migration-base/$DATA/schema.filepath`
         export USER_GENERATED_DATA_S3_URL=$USER_GENERATED_DATA_S3_BUCKET/$USER_GENERATED_DATA_FILEPATH
         s3cmd -v --config=/tmp/.user-generated-data.s3cfg get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/schema.sql
@@ -37,7 +36,6 @@ if [ ! -f $dna_path/db/migration-base/$DATA/data.sql ]; then
 
     if [ -f $dna_path/db/migration-base/$DATA/data.filepath ]; then
 
-        export USER_GENERATED_DATA_S3_BUCKET="s3://user-data-backups"
         export USER_GENERATED_DATA_FILEPATH=`cat $dna_path/db/migration-base/$DATA/data.filepath`
         export USER_GENERATED_DATA_S3_URL=$USER_GENERATED_DATA_S3_BUCKET/$USER_GENERATED_DATA_FILEPATH
         s3cmd -v --config=/tmp/.user-generated-data.s3cfg get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/data.sql
@@ -58,7 +56,7 @@ if [ ! -d $dna_path/db/migration-base/$DATA/media/ ]; then
 
     if [ -f $dna_path/db/migration-base/$DATA/media.folderpath ]; then
 
-        export USER_GENERATED_MEDIA_S3_BUCKET="s3://user-data-backups"
+        export USER_GENERATED_MEDIA_S3_BUCKET=$USER_GENERATED_DATA_S3_BUCKET
         export USER_GENERATED_MEDIA_FOLDERPATH=`cat $dna_path/db/migration-base/$DATA/media.folderpath`
         export USER_GENERATED_MEDIA_S3_URL=$USER_GENERATED_MEDIA_S3_BUCKET/$USER_GENERATED_MEDIA_FOLDERPATH
         mkdir $dna_path/db/migration-base/$DATA/media/
