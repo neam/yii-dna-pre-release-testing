@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#
+# Resets the database to the current DATA profile's migration base, then runs migrations
+#
+# Parameters:
+#    --force-s3-sync    will fetch user generated data from S3 despite there being existing files
+#
+
 set -x;
 
 script_path=`dirname $0`
@@ -35,7 +42,7 @@ if [ "$DATA" != "clean-db" ]; then
 
     echo "===== Load the user-generated data associated with this commit ===="
 
-    shell-scripts/fetch-user-generated-data.sh
+    shell-scripts/fetch-user-generated-data.sh $1
 
     # load mysql dumps
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/schema.sql
