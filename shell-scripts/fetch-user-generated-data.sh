@@ -88,7 +88,7 @@ if [ ! -d $dna_path/db/migration-base/$DATA/media/ ] || [ "$FORCE" ]; then
         export USER_GENERATED_MEDIA_FOLDERPATH=`cat $dna_path/db/migration-base/$DATA/media.folderpath`
         export USER_GENERATED_MEDIA_S3_URL=$USER_GENERATED_MEDIA_S3_BUCKET/$USER_GENERATED_MEDIA_FOLDERPATH
         mkdir $dna_path/db/migration-base/$DATA/media/ || true
-        s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive sync "$USER_GENERATED_MEDIA_S3_URL" $dna_path/db/migration-base/$DATA/media/
+        s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive sync "$USER_GENERATED_MEDIA_S3_URL" $dna_path/db/migration-base/$DATA/
 
         echo "User media downloaded from $USER_GENERATED_DATA_S3_URL to $dna_path/db/migration-base/$DATA/media/"
 
