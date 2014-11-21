@@ -24,11 +24,19 @@ set -o errexit
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
 
-console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
-
 # make app config available as shell variables
 php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh
 source /tmp/php-app-config.sh
+
+if [ "$DATA" != "clean-db" ]; then
+
+    echo "===== Fetch the user-generated data associated with this commit ===="
+
+    shell-scripts/fetch-user-generated-data.sh $1
+
+fi
+
+console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
 
 if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_HOST=$TEST_DB_HOST
