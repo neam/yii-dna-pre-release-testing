@@ -36,7 +36,9 @@ if [ "$DATA" != "clean-db" ]; then
 
 fi
 
+# Clear current data
 console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0
+rm -rf $dna_path/db/data/p3media/*
 
 if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_HOST=$TEST_DB_HOST
@@ -55,7 +57,6 @@ if [ "$DATA" != "clean-db" ]; then
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/data.sql
 
     # copy the downloaded data to the p3media folder
-    rm -rf $dna_path/db/data/p3media/*
     SOURCE_PATH=$dna_path/db/migration-base/$DATA/media
     if [ "$(ls -A $SOURCE_PATH/)" ]; then
         cp -r $SOURCE_PATH/* $dna_path/db/data/p3media/
