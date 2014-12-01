@@ -50,8 +50,6 @@ if [ "$DATA" != "clean-db" ]; then
 
     echo "===== Load the user-generated data associated with this commit ===="
 
-    shell-scripts/fetch-user-generated-data.sh $1
-
     # load mysql dumps
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/schema.sql
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/data.sql
