@@ -94,11 +94,11 @@ if [ "$DATA" == "" ]; then
 
 fi
 
-echo "* Loading fixtures" | tee -a $LOG
-console/yii-dna-pre-release-testing-console fixture --connectionID=$connectionID load >> $LOG
-
 echo "* Running migrations" | tee -a $LOG
 console/yii-dna-pre-release-testing-console migrate --connectionID=$connectionID --interactive=0 >> $LOG
+
+echo "* Loading fixtures" | tee -a $LOG
+console/yii-dna-pre-release-testing-console fixture --connectionID=$connectionID load >> $LOG
 
 echo "* Generating database views" | tee -a $LOG
 console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID item >> $LOG
