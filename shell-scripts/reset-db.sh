@@ -64,6 +64,13 @@ if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_NAME=$TEST_DB_NAME
 fi
 
+echo "* Setting schema character set and collation defaults" | tee -a $LOG
+if [ -f $dna_path/db/migration-base/$DATA/alter-schema-defaults.sql ]; then
+    mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD < $dna_path/db/migration-base/$DATA/alter-schema-defaults.sql
+else
+    echo "ALTER SCHEMA $DATABASE_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_bin;" | mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD
+fi
+
 if [ "$DATA" != "clean-db" ]; then
 
     echo "* Loading the user-generated data associated with this commit" | tee -a $LOG
