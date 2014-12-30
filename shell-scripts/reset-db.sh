@@ -109,8 +109,7 @@ echo "* Loading fixtures" | tee -a $LOG
 console/yii-dna-pre-release-testing-console fixture --connectionID=$connectionID load >> $LOG
 
 echo "* Generating database views" | tee -a $LOG
-console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID item >> $LOG
-console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID itemTable >> $LOG
+console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID postResetDb >> $LOG
 
 if [ "$connectionID" != "dbTest" ]; then
 
