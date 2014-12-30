@@ -26,6 +26,14 @@ LOG=/tmp/reset-db.sh.log
 
 echo "* Reset db started. Logging to $LOG" | tee -a $LOG
 
+# Show script name and line number when errors occur to make errors easier to debug
+trap 'echo "
+! Script error in $0 on or near line ${LINENO}. Check $LOG for details
+
+    To view log:
+    cat $LOG | less
+"' ERR
+
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
 
