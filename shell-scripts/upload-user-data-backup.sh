@@ -20,6 +20,13 @@ export PATH="/app/vendor/php/bin/:$PATH"
 DATETIME=$(date +"%Y-%m-%d_%H%M%S")
 FOLDER=DATA-$DATA/ENV-$ENV
 
+# sending --non-compact will negate the default behavior of dumping the data in a compact format. useful to be able to inspect the dumped data files
+if [ "$1" == "--non-compact" ]; then
+    COMPACT="false"
+else
+    COMPACT="true"
+fi
+
 # dump and upload schema sql
 
 FILEPATH=$FOLDER/$DATETIME/schema.sql
@@ -43,7 +50,7 @@ FILEPATH=$FOLDER/$DATETIME/data.sql
 if [ -f $dna_path/db/data.sql ] ; then
     rm $dna_path/db/data.sql
 fi
-console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=data.sql --schema=false --compact=false
+console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=data.sql --schema=false --compact=$COMPACT
 if [ ! -f $dna_path/db/data.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/data.sql"
     exit 1
