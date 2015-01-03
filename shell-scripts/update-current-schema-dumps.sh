@@ -14,7 +14,11 @@ mysqldump -h$DATABASE_HOST -P$DATABASE_PORT -u$DATABASE_USER --password=$DATABAS
 
 # dump the current schema
 console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/schema.sql --data=false --schema=true
-console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/data.sql --data=true --schema=false --compact=false
+
+# dump the current data if DATA=clean-db (otherwise skip in order to save time)
+if [ "$DATA" == "clean-db" ]; then
+    console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=migration-results/$DATA/data.sql --data=true --schema=false --compact=false
+fi
 
 # perform some clean-up on the dump files so that it needs to be committed less often
 function cleanupdump {
