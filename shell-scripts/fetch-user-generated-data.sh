@@ -46,7 +46,13 @@ if [ ! -f $dna_path/db/migration-base/$DATA/schema.sql ] || [ "$FORCE" ]; then
 
         export USER_GENERATED_DATA_FILEPATH=`cat $dna_path/db/migration-base/$DATA/schema.filepath`
         export USER_GENERATED_DATA_S3_URL=$USER_GENERATED_DATA_S3_BUCKET/$USER_GENERATED_DATA_FILEPATH
-        s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/schema.sql
+
+        if [ ${USER_GENERATED_DATA_S3_URL: -3} == ".gz" ]; then
+            s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/schema.sql.gz
+            gunzip -f $dna_path/db/migration-base/$DATA/schema.sql.gz
+        else
+            s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/schema.sql
+        fi
 
         echo "User data dump downloaded from $USER_GENERATED_DATA_S3_URL to $dna_path/db/migration-base/$DATA/schema.sql"
 
@@ -66,7 +72,13 @@ if [ ! -f $dna_path/db/migration-base/$DATA/data.sql ] || [ "$FORCE" ]; then
 
         export USER_GENERATED_DATA_FILEPATH=`cat $dna_path/db/migration-base/$DATA/data.filepath`
         export USER_GENERATED_DATA_S3_URL=$USER_GENERATED_DATA_S3_BUCKET/$USER_GENERATED_DATA_FILEPATH
-        s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/data.sql
+
+        if [ ${USER_GENERATED_DATA_S3_URL: -3} == ".gz" ]; then
+            s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/data.sql.gz
+            gunzip -f $dna_path/db/migration-base/$DATA/data.sql.gz
+        else
+            s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/data.sql
+        fi
 
         echo "User data dump downloaded from $USER_GENERATED_DATA_S3_URL to $dna_path/db/migration-base/$DATA/data.sql"
 

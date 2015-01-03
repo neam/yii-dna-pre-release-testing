@@ -39,7 +39,9 @@ if [ ! -f $dna_path/db/schema.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/schema.sql"
     exit 1
 fi
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
+gzip -f $dna_path/db/schema.sql
+FILEPATH=$FILEPATH.gz
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 
 echo $FILEPATH > $dna_path/db/schema.filepath
 
@@ -55,7 +57,9 @@ if [ ! -f $dna_path/db/data.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/data.sql"
     exit 1
 fi
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
+gzip -f $dna_path/db/data.sql
+FILEPATH=$FILEPATH.gz
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 
 echo $FILEPATH > $dna_path/db/data.filepath
 
