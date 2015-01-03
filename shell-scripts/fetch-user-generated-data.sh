@@ -38,7 +38,7 @@ else
     FORCE=""
 fi
 
-if [ ! -f $dna_path/db/migration-base/$DATA/schema.sql ] || [ "$FORCE" ]; then
+if ([ ! -f $dna_path/db/migration-base/$DATA/schema.sql ] && [ ! -f $dna_path/db/migration-base/$DATA/schema.sql.gz ]) || [ "$FORCE" ]; then
 
     echo "== Fetching the user-generated schema associated with this commit =="
 
@@ -49,7 +49,7 @@ if [ ! -f $dna_path/db/migration-base/$DATA/schema.sql ] || [ "$FORCE" ]; then
 
         if [ ${USER_GENERATED_DATA_S3_URL: -3} == ".gz" ]; then
             s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/schema.sql.gz
-            gunzip -f $dna_path/db/migration-base/$DATA/schema.sql.gz
+            gunzip $FORCE $dna_path/db/migration-base/$DATA/schema.sql.gz
         else
             s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/schema.sql
         fi
@@ -61,10 +61,10 @@ if [ ! -f $dna_path/db/migration-base/$DATA/schema.sql ] || [ "$FORCE" ]; then
     fi
 
 else
-    echo "Not fetching user-generated data since $dna_path/db/migration-base/$DATA/schema.sql already exists"
+    echo "Not fetching user-generated data since $dna_path/db/migration-base/$DATA/schema.sql(.gz) already exists"
 fi
 
-if [ ! -f $dna_path/db/migration-base/$DATA/data.sql ] || [ "$FORCE" ]; then
+if ([ ! -f $dna_path/db/migration-base/$DATA/data.sql ] && [ ! -f $dna_path/db/migration-base/$DATA/data.sql.gz ]) || [ "$FORCE" ]; then
 
     echo "== Fetching the user-generated data associated with this commit =="
 
@@ -75,7 +75,7 @@ if [ ! -f $dna_path/db/migration-base/$DATA/data.sql ] || [ "$FORCE" ]; then
 
         if [ ${USER_GENERATED_DATA_S3_URL: -3} == ".gz" ]; then
             s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/data.sql.gz
-            gunzip -f $dna_path/db/migration-base/$DATA/data.sql.gz
+            gunzip $FORCE $dna_path/db/migration-base/$DATA/data.sql.gz
         else
             s3cmd -v --config=/tmp/.user-generated-data.s3cfg $FORCE get "$USER_GENERATED_DATA_S3_URL" $dna_path/db/migration-base/$DATA/data.sql
         fi
@@ -87,7 +87,7 @@ if [ ! -f $dna_path/db/migration-base/$DATA/data.sql ] || [ "$FORCE" ]; then
     fi
 
 else
-    echo "Not fetching user-generated data since $dna_path/db/migration-base/$DATA/data.sql already exists"
+    echo "Not fetching user-generated data since $dna_path/db/migration-base/$DATA/data.sql(.gz) already exists"
 fi
 
 if [ ! -d $dna_path/db/migration-base/$DATA/media/ ] || [ "$FORCE" ]; then
