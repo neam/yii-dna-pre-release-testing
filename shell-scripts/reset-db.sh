@@ -81,7 +81,7 @@ if [ "$DATA" != "clean-db" ]; then
 
     # copy the downloaded data to the p3media folder
     SOURCE_PATH=$dna_path/db/migration-base/$DATA/media
-    if [ "$(ls -A $SOURCE_PATH/)" ]; then
+    if [ "$(ls $SOURCE_PATH/)" ]; then
         cp -r $SOURCE_PATH/* $dna_path/db/data/p3media/
     else
         echo "Warning: No media files found" | tee -a $LOG
