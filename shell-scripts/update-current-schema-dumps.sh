@@ -30,6 +30,9 @@ function cleanupdump {
 
 cleanupdump $dna_path/db/migration-results/$DATA/create-db.sql
 cleanupdump $dna_path/db/migration-results/$DATA/schema.sql
-cleanupdump $dna_path/db/migration-results/$DATA/data.sql
+
+if [ "$DATA" == "clean-db" ]; then
+    cleanupdump $dna_path/db/migration-results/$DATA/data.sql
+fi
 
 exit 0
