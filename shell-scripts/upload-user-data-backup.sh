@@ -7,9 +7,18 @@ set -o errexit
 
 script_path=`dirname $0`
 
+if [ "$connectionID" == "" ]; then
+
+    echo "The environment variable connectionID needs to be set"
+    exit 1
+
+fi
+
 # cd to app root
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
+
+# dump
 
 # configure s3cmd
 bash ../yii-dna-deployment/configure-s3cmd.sh
@@ -27,41 +36,51 @@ else
     COMPACT="true"
 fi
 
-# dump and upload schema sql
+# dump schema sql
 
-FILEPATH=$FOLDER/$DATETIME/schema.sql
+SCHEMA_FILEPATH=$FOLDER/$DATETIME/schema.sql
 
 if [ -f $dna_path/db/schema.sql ] ; then
     rm $dna_path/db/schema.sql
 fi
-console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=schema.sql --data=false
+console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=schema.sql --data=false
 if [ ! -f $dna_path/db/schema.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/schema.sql"
     exit 1
 fi
-gzip -f $dna_path/db/schema.sql
-FILEPATH=$FILEPATH.gz
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 
-echo $FILEPATH > $dna_path/db/schema.filepath
+# dump data sql
 
-# dump and upload data sql
-
-FILEPATH=$FOLDER/$DATETIME/data.sql
+DATA_FILEPATH=$FOLDER/$DATETIME/data.sql
 
 if [ -f $dna_path/db/data.sql ] ; then
     rm $dna_path/db/data.sql
 fi
-console/yii-dna-pre-release-testing-console mysqldump --dumpPath=dna/db --dumpFile=data.sql --schema=false --compact=$COMPACT
+console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=data.sql --schema=false --compact=$COMPACT
 if [ ! -f $dna_path/db/data.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/data.sql"
     exit 1
 fi
-gzip -f $dna_path/db/data.sql
-FILEPATH=$FILEPATH.gz
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$FILEPATH"
 
-echo $FILEPATH > $dna_path/db/data.filepath
+if [ "$1" == "--dump-only" ]; then
+    exit 0;
+fi
+
+# upload schema sql
+
+gzip -f $dna_path/db/schema.sql
+SCHEMA_FILEPATH=$SCHEMA_FILEPATH.gz
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$SCHEMA_FILEPATH"
+
+echo $SCHEMA_FILEPATH > $dna_path/db/schema.filepath
+
+# upload data sql
+
+gzip -f $dna_path/db/data.sql
+DATA_FILEPATH=$DATA_FILEPATH.gz
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$DATA_FILEPATH"
+
+echo $DATA_FILEPATH > $dna_path/db/data.filepath
 
 # dump and upload user media
 
