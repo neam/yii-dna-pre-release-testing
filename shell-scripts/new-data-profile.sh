@@ -25,6 +25,8 @@ fi
 
 if [ ! -d "$dna_path/db/migration-base/$TO" ]; then
     cp -r $dna_path/db/migration-base/$FROM $dna_path/db/migration-base/$TO
+    mkdir $dna_path/db/migration-base/$TO/media
+    touch $dna_path/db/migration-base/$TO/media/.gitkeep
 fi
 if [ ! -d "$dna_path/db/migration-results/$TO" ]; then
     cp -r $dna_path/db/migration-results/$FROM $dna_path/db/migration-results/$TO
@@ -35,3 +37,8 @@ if [ ! -d "$dna_path/db/migrations/$TO-only" ]; then
 fi
 
 echo "Data profile '$TO' is now available. Run reset-db.sh to make sure it works, then run upload-user-data-backup.sh and commit the relevant files to make it available for others"
+echo
+echo " Example:"
+echo "     export DATA=$TO"
+echo "     bin/reset-db.sh"
+echo "     bin/upload-user-data-backup.sh"
