@@ -7,11 +7,9 @@ set -o errexit
 
 script_path=`dirname $0`
 
+# defaults
 if [ "$connectionID" == "" ]; then
-
-    echo "The environment variable connectionID needs to be set"
-    exit 1
-
+    connectionID=db
 fi
 
 # cd to app root
