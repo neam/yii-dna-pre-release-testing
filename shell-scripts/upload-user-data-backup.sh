@@ -41,7 +41,7 @@ SCHEMA_FILEPATH=$FOLDER/$DATETIME/schema.sql
 if [ -f $dna_path/db/schema.sql ] ; then
     rm $dna_path/db/schema.sql
 fi
-console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=schema.sql --data=false
+console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=schema.sql --data=false --skip-triggers
 if [ ! -f $dna_path/db/schema.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/schema.sql"
     exit 1
