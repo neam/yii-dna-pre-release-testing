@@ -131,7 +131,7 @@ fi
 echo "* Reset db finished. Log is found at $LOG"
 echo
 echo "    To view log:"
-echo "    cat $LOG | less";
+echo "    cat $LOG | less -R";
 echo
 #echo "To view errors in log:"
 #echo "cat $LOG | grep rror | less";
