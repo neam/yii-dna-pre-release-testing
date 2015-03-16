@@ -118,6 +118,9 @@ console/yii-dna-pre-release-testing-console fixture --connectionID=$connectionID
 echo "* Generating database views" | tee -a $LOG
 console/yii-dna-pre-release-testing-console databaseviewgenerator --connectionID=$connectionID postResetDb >> $LOG
 
+echo "* Generating database routines" | tee -a $LOG
+console/yii-dna-pre-release-testing-console databaseroutinegenerator --connectionID=$connectionID postResetDb >> $LOG
+
 if [ "$connectionID" != "dbTest" ]; then
 
     echo "* Updating current schema dumps" | tee -a $LOG

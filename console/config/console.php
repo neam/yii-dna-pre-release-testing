@@ -61,6 +61,9 @@ $consoleConfig = array(
         'databaseviewgenerator' => array(
             'class' => 'dna.commands.DatabaseViewGeneratorCommand',
         ),
+        'databaseroutinegenerator' => array(
+            'class' => 'dna.commands.DatabaseRoutineGeneratorCommand',
+        ),
     ),
     'components' => array(
         'fixture-helper' => array(
