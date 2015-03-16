@@ -20,7 +20,9 @@ $consoleConfig = array(
     ),
     'basePath' => $applicationDirectory,
     'name' => 'Yii DNA Pre-Release Testing Console Application',
-    'import' => array(),
+    'import' => array(
+        'dna.vendor.neam.yii-relational-graph-db.traits.RelatedNodesDatabaseRoutineGeneratorTrait',
+    ),
     'commandMap' => array(
         'migrate' => array(
             // alias of the path where you extracted the zip file
