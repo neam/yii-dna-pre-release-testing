@@ -36,6 +36,7 @@ trap 'echo "
 
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
+media_path=$dna_path/db/data/p3media
 
 # make app config available as shell variables
 php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh >> $LOG
@@ -54,7 +55,7 @@ fi
 
 # Clear current data
 console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0 >> $LOG
-rm -rf $dna_path/db/data/p3media/*
+rm -rf $media_path/*
 
 if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_HOST=$TEST_DB_HOST
@@ -82,13 +83,13 @@ if [ "$DATA" != "clean-db" ]; then
     # copy the downloaded data to the p3media folder
     SOURCE_PATH=$dna_path/db/migration-base/$DATA/media
     if [ "$(ls $SOURCE_PATH/)" ]; then
-        cp -r $SOURCE_PATH/* $dna_path/db/data/p3media/
+        cp -r $SOURCE_PATH/* $media_path/
     else
         echo "Warning: No media files found" | tee -a $LOG
     fi
 
     # make downloaded media directories owned and writable by the web server
-    chown -R nobody: $dna_path/db/data/p3media/
+    chown -R nobody: $media_path/
 
 fi
 
