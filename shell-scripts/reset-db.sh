@@ -19,6 +19,14 @@ if [ "$connectionID" == "" ]; then
 
 fi
 
+if [ "$WEB_SERVER_POSIX_USER" == "" ]; then
+  WEB_SERVER_POSIX_USER="www-data"
+fi
+
+if [ "$WEB_SERVER_POSIX_GROUP" == "" ]; then
+  WEB_SERVER_POSIX_GROUP=""
+fi
+
 # fail on any error
 set -o errexit
 
@@ -89,7 +97,7 @@ if [ "$DATA" != "clean-db" ]; then
     fi
 
     # make downloaded media directories owned and writable by the web server
-    chown -R nobody: $media_path/
+    chown -R $WEB_SERVER_POSIX_USER:$WEB_SERVER_POSIX_GROUP $media_path/
 
 fi
 
