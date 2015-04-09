@@ -19,7 +19,9 @@ dna_path=$(pwd)/../../../dna
 # dump
 
 # configure s3cmd
-bash ../yii-dna-deployment/configure-s3cmd.sh
+echo "[default]
+access_key = $USER_DATA_BACKUP_UPLOADERS_ACCESS_KEY
+secret_key = $USER_DATA_BACKUP_UPLOADERS_SECRET" > /tmp/.user-generated-data.s3cfg
 
 # make php binaries available
 export PATH="/app/vendor/php/bin/:$PATH"
