@@ -38,6 +38,11 @@ else
     FORCE=""
 fi
 
+# configure s3cmd
+echo "[default]
+access_key = $USER_DATA_BACKUP_UPLOADERS_ACCESS_KEY
+secret_key = $USER_DATA_BACKUP_UPLOADERS_SECRET" > /tmp/.user-generated-data.s3cfg
+
 if ([ ! -f $dna_path/db/migration-base/$DATA/schema.sql ] && [ ! -f $dna_path/db/migration-base/$DATA/schema.sql.gz ]) || [ "$FORCE" ]; then
 
     echo "== Fetching the user-generated schema associated with this commit =="
