@@ -15,6 +15,7 @@ fi
 # cd to app root
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
+media_path=$dna_path/db/data/p3media
 
 # dump
 
@@ -86,7 +87,7 @@ echo $DATA_FILEPATH > $dna_path/db/data.filepath
 
 FOLDERPATH=$FOLDER/$DATETIME/media/
 
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $dna_path/db/data/p3media/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $media_path/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 echo $FOLDERPATH > $dna_path/db/media.folderpath
 
 set +x
