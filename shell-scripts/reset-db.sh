@@ -44,7 +44,7 @@ trap 'echo "
 
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
-media_path=$dna_path/db/data/p3media
+media_path=/files/$DATA/media
 
 # make app config available as shell variables
 php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh >> $LOG

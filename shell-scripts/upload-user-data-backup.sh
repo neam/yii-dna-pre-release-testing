@@ -15,7 +15,7 @@ fi
 # cd to app root
 cd $script_path/..
 dna_path=$(pwd)/../../../dna
-media_path=$dna_path/db/data/p3media
+media_path=/files/$DATA/media
 
 # dump
 
