@@ -19,14 +19,6 @@ if [ "$connectionID" == "" ]; then
 
 fi
 
-if [ "$WEB_SERVER_POSIX_USER" == "" ]; then
-  WEB_SERVER_POSIX_USER="www-data"
-fi
-
-if [ "$WEB_SERVER_POSIX_GROUP" == "" ]; then
-  WEB_SERVER_POSIX_GROUP=""
-fi
-
 # fail on any error
 set -o errexit
 
@@ -90,17 +82,8 @@ if [ "$DATA" != "clean-db" ]; then
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/schema.sql
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/$DATA/data.sql
 
-    # copy the downloaded data to the p3media folder
-    SOURCE_PATH=$dna_path/db/migration-base/$DATA/media
-    if [ "$(ls $SOURCE_PATH/)" ]; then
-        mkdir -p $media_path/
-        cp -r $SOURCE_PATH/* $media_path/
-    else
-        echo "Warning: No media files found" | tee -a $LOG
-    fi
-
-    # make downloaded media directories owned and writable by the web server
-    chown -R $WEB_SERVER_POSIX_USER:$WEB_SERVER_POSIX_GROUP $media_path/
+    # load user generated files (not sending --force-s3-sync to script since it is already performed above)
+    shell-scripts/reset-user-generated-files.sh >> $LOG
 
 fi
 
