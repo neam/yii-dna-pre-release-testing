@@ -17,6 +17,7 @@
         "shell-scripts/fetch-user-generated-data.sh",
         "shell-scripts/post-release-user-generated-schema-to-clean-db-schema-routine.sh",
         "shell-scripts/reset-db.sh",
+        "shell-scripts/reset-user-generated-files.sh",
         "shell-scripts/update-current-schema-dumps.sh",
         "shell-scripts/upload-user-data-backup.sh",
         "shell-scripts/yiic-migrate.sh"
