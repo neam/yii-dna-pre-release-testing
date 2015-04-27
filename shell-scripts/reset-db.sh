@@ -57,7 +57,6 @@ fi
 
 # Clear current data
 console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0 >> $LOG
-rm -rf $media_path/*
 
 if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_HOST=$TEST_DB_HOST
