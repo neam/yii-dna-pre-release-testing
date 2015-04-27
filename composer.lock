@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc717b9dd32b83cd21bdb10728e72cdc",
+    "hash": "11e596ab2cd56e9d41bacc3731d4e6d9",
     "packages": [
         {
             "name": "motin/yii-consoletools",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/motin/yii-consoletools.git",
-                "reference": "d51a4f07307735d7b33b9084d9fafc7aaa643593"
+                "reference": "f3f1c94f91378c4cbe6f4d6e8bc434c64ff83a69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/motin/yii-consoletools/zipball/d51a4f07307735d7b33b9084d9fafc7aaa643593",
-                "reference": "d51a4f07307735d7b33b9084d9fafc7aaa643593",
+                "url": "https://api.github.com/repos/motin/yii-consoletools/zipball/f3f1c94f91378c4cbe6f4d6e8bc434c64ff83a69",
+                "reference": "f3f1c94f91378c4cbe6f4d6e8bc434c64ff83a69",
                 "shasum": ""
             },
             "type": "library",
@@ -45,7 +45,7 @@
                 "tools",
                 "yii"
             ],
-            "time": "2014-09-25 21:54:49"
+            "time": "2015-03-16 12:21:14"
         },
         {
             "name": "neam/php-app-config",
@@ -53,16 +53,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/neam/php-app-config.git",
-                "reference": "2feec0c6fd337a5bcce089254cb43f6c402828ed"
+                "reference": "c32cb86039899c525a6a326914d2c7d5d690e0e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neam/php-app-config/zipball/2feec0c6fd337a5bcce089254cb43f6c402828ed",
-                "reference": "2feec0c6fd337a5bcce089254cb43f6c402828ed",
+                "url": "https://api.github.com/repos/neam/php-app-config/zipball/c32cb86039899c525a6a326914d2c7d5d690e0e9",
+                "reference": "c32cb86039899c525a6a326914d2c7d5d690e0e9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3.0",
+                "vlucas/phpdotenv": "v1.0.8"
             },
             "type": "library",
             "autoload": {
@@ -88,7 +89,7 @@
                 "config",
                 "php"
             ],
-            "time": "2014-09-25 13:09:40"
+            "time": "2015-03-30 09:58:45"
         },
         {
             "name": "sumwai/yii-fixture-helper",
@@ -123,6 +124,57 @@
             "time": "2014-03-19 14:30:02"
         },
         {
+            "name": "vlucas/phpdotenv",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/phpdotenv.git",
+                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
+                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Dotenv": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "homepage": "http://github.com/vlucas/phpdotenv",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2014-10-14 15:06:44"
+        },
+        {
             "name": "yiiext/migrate-command",
             "version": "dev-master",
             "source": {
@@ -132,7 +184,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiiext/migrate-command/zipball/35f315b1fedc40bc9f551758bdb2b7f969d48005",
+                "url": "https://api.github.com/repos/yiiext/migrate-command/zipball/9191b9b6624620c3c6a41f0867e06f22e2c77004",
                 "reference": "35f315b",
                 "shasum": ""
             },
@@ -148,9 +200,7 @@
             "authors": [
                 {
                     "name": "Carsten Brandt",
-                    "email": "mail@cebe.cc",
-                    "homepage": "http://cebe.cc/",
-                    "role": "Core framework development"
+                    "email": "mail@cebe.cc"
                 }
             ],
             "description": "This is an enhanced version of the Yii Database Migration Tool that adds module support and many more usefull features.",
@@ -164,16 +214,16 @@
         },
         {
             "name": "yiisoft/yii",
-            "version": "1.1.15",
+            "version": "1.1.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii.git",
-                "reference": "022a51d34ad2c95db2b77b2075e98f5dd78b08e0"
+                "reference": "bca0420b6799b0b2a7966aa90bcd15cb4aa73563"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii/zipball/022a51d34ad2c95db2b77b2075e98f5dd78b08e0",
-                "reference": "022a51d34ad2c95db2b77b2075e98f5dd78b08e0",
+                "url": "https://api.github.com/repos/yiisoft/yii/zipball/bca0420b6799b0b2a7966aa90bcd15cb4aa73563",
+                "reference": "bca0420b6799b0b2a7966aa90bcd15cb4aa73563",
                 "shasum": ""
             },
             "require": {
@@ -183,6 +233,12 @@
                 "framework/yiic"
             ],
             "type": "library",
+            "autoload": {
+                "classmap": [
+                    "framework/YiiBase.php",
+                    "framework/yii.php"
+                ]
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
@@ -244,12 +300,10 @@
                 "framework",
                 "yii"
             ],
-            "time": "2014-06-30 00:14:27"
+            "time": "2014-12-21 19:30:17"
         }
     ],
-    "packages-dev": [
-
-    ],
+    "packages-dev": [],
     "aliases": [
         {
             "alias": "0.7.2.1",
@@ -266,10 +320,9 @@
         "neam/php-app-config": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.0"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
