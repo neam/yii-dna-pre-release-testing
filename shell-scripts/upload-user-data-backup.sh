@@ -87,7 +87,11 @@ echo $DATA_FILEPATH > $dna_path/db/data.filepath
 
 FOLDERPATH=$FOLDER/$DATETIME/media/
 
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $media_path/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
+if [ "$(ls $media_path/)" ]; then
+    s3cmd -v --config=/tmp/.user-generated-data.s3cfg --recursive put $media_path/ "$USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
+else
+    echo "Warning: No media files found" | tee -a $LOG
+fi
 echo $FOLDERPATH > $dna_path/db/media.folderpath
 
 set +x
