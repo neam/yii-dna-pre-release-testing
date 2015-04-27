@@ -41,4 +41,4 @@ echo
 echo " Example:"
 echo "     export DATA=$TO"
 echo "     bin/reset-db.sh"
-echo "     bin/upload-user-data-backup.sh"
+echo "     bin/upload-current-user-data.sh"
