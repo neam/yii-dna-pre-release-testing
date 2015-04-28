@@ -16,6 +16,9 @@ The migrations-folder should at any time contain the migrations necessary to mig
 
 This ensures that release-upgrades can be tested before actual releases.
 
+# DATA profiles
+Since there may be multiple independent databases deployed, one may keep track of them separately by creating data profiles. That is, instead of simply having "clean-db" and "user-generated" variants, we can create any new dataset and call it for instance "customer1" to be able to track the data set of that particular customer-deployment. 
+
 ## FAQ
 
 ### How are new migrations created?
@@ -26,10 +29,9 @@ This puts the empty migration files in the common migrations dir. If you need a 
 
 ### How are new DATA profiles added?
 
-Deploy using DATA=clean-db, then upload the current current user-generated data to S3 under the name of the new DATA profile.
+Create a new data profile using the helper script, then upload the current current user-generated data to S3, commit the references and profile-related files in dna (anything with <profileref> in it's path) and push.
 
-Example:
-
-    export DATA=newprofile
-    ssh dokku@$DOKKU_HOST config:set $APPNAME DATA=$DATA
-    ssh dokku@$DOKKU_HOST run $APPNAME /app/vendor/neam/yii-dna-pre-release-testing/shell-scripts/upload-user-data-backup.sh
+    vendor/neam/yii-dna-pre-release-testing/shell-scripts/new-data-profile.sh <profileref>
+    vendor/neam/yii-dna-pre-release-testing/shell-scripts/upload-user-data-backup.sh
+    # then run the three commands to update the data refs
+    # commit and push
