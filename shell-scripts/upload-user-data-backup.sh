@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 # fail on any error
 set -o errexit
@@ -62,6 +62,10 @@ if [ ! -f $dna_path/db/data.sql ] ; then
     echo "The mysql dump is not found at the expected location: db/data.sql"
     exit 1
 fi
+
+echo "# Commands to run to use the dumped data and schema dumps locally:"
+echo "cp '$dna_path/db/data.sql' dna/db/migration-base/$DATA/"
+echo "cp '$dna_path/db/schema.sql' dna/db/migration-base/$DATA/"
 
 if [ "$1" == "--dump-only" ]; then
     exit 0;
