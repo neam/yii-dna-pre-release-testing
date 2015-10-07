@@ -80,6 +80,9 @@ else
     echo "ALTER SCHEMA $DATABASE_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_bin;" | mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD
 fi
 
+echo "* Removing DEFINER metadata from schema dump"
+sed -i -e 's/\/\*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER \*\///' -e 's/\/\*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER \*\///' $dna_path/db/migration-base/$DATA/schema.sql
+
 if [ "$DATA" != "clean-db" ]; then
 
     echo "* Loading the user-generated data associated with this commit" | tee -a $LOG
