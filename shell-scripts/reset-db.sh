@@ -41,6 +41,13 @@ dna_path=$(pwd)/../../../dna
 php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh >> $LOG
 source /tmp/php-app-config.sh
 
+if [ "$DATA" == "" ]; then
+
+    echo "The environment variable DATA needs to be set"
+    exit 1
+
+fi
+
 # set media path
 media_path=/files/$DATA/media
 
@@ -93,13 +100,6 @@ if [ "$DATA" == "clean-db" ]; then
     # load mysql dumps
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/clean-db/schema.sql
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME < $dna_path/db/migration-base/clean-db/data.sql
-
-fi
-
-if [ "$DATA" == "" ]; then
-
-    echo "The environment variable DATA needs to be set" | tee -a $LOG
-    exit 1
 
 fi
 
