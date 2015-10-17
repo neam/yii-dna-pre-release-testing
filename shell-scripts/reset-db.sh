@@ -81,7 +81,7 @@ else
 fi
 
 echo "* Removing DEFINER metadata from schema dump"
-sed -i -e 's/\/\*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER \*\///' -e 's/\/\*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER \*\///' $dna_path/db/migration-base/$DATA/schema.sql
+sed -i -e 's/\/\*!50013 DEFINER=`[^`]*`@`[^`]*` SQL SECURITY DEFINER \*\///' $dna_path/db/migration-base/$DATA/schema.sql
 
 if [ "$DATA" != "clean-db" ]; then
 
