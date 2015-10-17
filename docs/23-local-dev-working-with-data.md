@@ -25,27 +25,43 @@ If you have already run this once in the current DATA profile, no data will be r
 
 ## To upload your current data
 
-    bin/upload-current-user-data.sh
+Enter a shell and run:
 
-Commit and push.
+    vendor/bin/upload-current-user-data.sh
 
-NOTE: 
+Then, run the echo scripts at the bottom (it says its optional) to copy your new files into dna/db/migration-base/
 
-	Also commit your files in dna/db/migration-base/ - but remember to remove the 5 files directly subordinate from dna/db:
-
-		data.filepath
-		data.sql.gz
-		media.folderpath
-		schema.filepath
-		schema.sql.gz
-
-	Files to commit are for example:
+Commit your files in dna/db/migration-base/ - the three files to commit are:
 
 		dna/db/migration-base/{project-name}/schema.filepath
 		dna/db/migration-base/{project-name}/data.filepath
 		dna/db/migration-base/{project-name}/media.folderpath
 
-NOTE #2:
+Push.
 
-	After you have ran the "bin/upload-current-user-data.sh" and before you commit you need to run the echo scripts at the bottom (it says its optional) to copy your new files into dna/db/migration-base/
+## Migrations
 
+### How are new migrations created?
+
+    vendor/bin/yii-dna-pre-release-testing-console migrate create migration_foo
+
+This puts the empty migration files in the common migrations dir. If you need a migration only for clean-db or only for user-generated you'll need to move it.
+
+### How are new DATA profiles added?
+
+Create a new data profile using the helper script, then upload the current current user-generated data to S3, commit the references and profile-related files in dna (anything with <profileref> in it's path) and push.
+
+    vendor/neam/yii-dna-pre-release-testing/shell-scripts/new-data-profile.sh <profileref>
+    vendor/neam/yii-dna-pre-release-testing/shell-scripts/upload-user-data-backup.sh
+    # then run the three commands to update the data refs
+    # commit and push
+
+### Removing applied migrations in order to remove clutter
+
+Run the following to take the current user-generated schema and copies it to the migration base of the clean-db schema. This makes the default schema to be identical with the user-generated version, and this routine should be done after a release (ie when migrations have been run in production) so that already production-applied migrations can be removed from the current codebase in order to minimize clutter.
+
+    export DATA=example
+    vendor/neam/yii-dna-pre-release-testing/shell-scripts/post-release-user-generated-schema-to-clean-db-schema-routine.sh
+    # then, manually remove already applied migrations
+
+A comment: Migrations are crucial when it comes to upgrading older deployments to the latest schema. If, however, there are no need of upgrading older deployments to the latest schema and code, migrations may instead add to the maintenance and development routines burden without adding value to the project. This is for instance the case during early development where there are no live deployments, or when all live deployments have run all migrations to date and there is no need to restore from old backups.
