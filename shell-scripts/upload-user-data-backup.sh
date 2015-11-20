@@ -105,19 +105,35 @@ echo "=== Upload finished ==="
 
 DATA_FILEPATH=$(cat $dna_path/db/data.filepath)
 echo "User generated db schema sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$DATA_FILEPATH"
-echo "Set the contents of 'db/migration-base/$DATA/schema.filepath' to '$DATA_FILEPATH' in order to use this upload"
+#echo "Set the contents of 'db/migration-base/$DATA/schema.filepath' to '$DATA_FILEPATH' in order to use this upload"
 
 SCHEMA_FILEPATH=$(cat $dna_path/db/schema.filepath)
 echo "User generated db data sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$SCHEMA_FILEPATH"
-echo "Set the contents of 'db/migration-base/$DATA/data.filepath' to '$SCHEMA_FILEPATH' in order to use this upload"
+#echo "Set the contents of 'db/migration-base/$DATA/data.filepath' to '$SCHEMA_FILEPATH' in order to use this upload"
 
 FOLDERPATH=$(cat $dna_path/db/media.folderpath)
 echo "User media uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
-echo "Set the contents of 'db/migration-base/$DATA/media.folderpath' to '$FOLDERPATH' in order to use this upload"
+#echo "Set the contents of 'db/migration-base/$DATA/media.folderpath' to '$FOLDERPATH' in order to use this upload"
 echo
-echo "# Commands to run locally in order to set the refs to point to this user data (optional - do this if your data set is meant to be the base of future production deployments)"
-echo "echo '$SCHEMA_FILEPATH' > dna/db/migration-base/$DATA/schema.filepath"
-echo "echo '$DATA_FILEPATH' > dna/db/migration-base/$DATA/data.filepath"
-echo "echo '$FOLDERPATH' > dna/db/migration-base/$DATA/media.folderpath"
+echo "# Commands that have been run locally in order to set the refs to point to this user data (revert these changes if your data set is not meant to be the base of future production deployments)"
+
+# Output to screen and log file
+if [ ! -f $dna_path/db/uploaded-user-data.log ] ; then
+    touch $dna_path/db/uploaded-user-data.log;
+fi
+echo "# $FOLDER/$DATETIME" >> $dna_path/db/uploaded-user-data.log
+echo "echo '$SCHEMA_FILEPATH' > dna/db/migration-base/$DATA/schema.filepath" | tee -a $dna_path/db/uploaded-user-data.log
+echo "echo '$DATA_FILEPATH' > dna/db/migration-base/$DATA/data.filepath" | tee -a $dna_path/db/uploaded-user-data.log
+echo "echo '$FOLDERPATH' > dna/db/migration-base/$DATA/media.folderpath" | tee -a $dna_path/db/uploaded-user-data.log
+echo "" | tee -a $dna_path/db/uploaded-user-data.log
+
+# Set the contents by running the commands
+set -x
+echo '$SCHEMA_FILEPATH' > $dna_path/db/migration-base/$DATA/schema.filepath
+echo '$DATA_FILEPATH' > $dna_path/db/migration-base/$DATA/data.filepath
+echo '$FOLDERPATH' > $dna_path/db/migration-base/$DATA/media.folderpath
+set +x
+
+echo "These commands have been copied to dna/db/uploaded-user-data.log so that they can easily be copied and run on another system/deployment"
 
 exit 0
