@@ -115,6 +115,7 @@ FOLDERPATH=$(cat $dna_path/db/media.folderpath)
 echo "User media uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 #echo "Set the contents of 'db/migration-base/$DATA/media.folderpath' to '$FOLDERPATH' in order to use this upload"
 echo
+echo "=== Updating the local data refs to the recently uploaded ones ==="
 echo "# Commands that have been run locally in order to set the refs to point to this user data (revert these changes if your data set is not meant to be the base of future production deployments)"
 
 # Output to screen and log file
@@ -128,11 +129,9 @@ echo "echo '$FOLDERPATH' > dna/db/migration-base/$DATA/media.folderpath" | tee -
 echo "" | tee -a $dna_path/db/uploaded-user-data.log
 
 # Set the contents by running the commands
-set -x
 echo '$SCHEMA_FILEPATH' > $dna_path/db/migration-base/$DATA/schema.filepath
 echo '$DATA_FILEPATH' > $dna_path/db/migration-base/$DATA/data.filepath
 echo '$FOLDERPATH' > $dna_path/db/migration-base/$DATA/media.folderpath
-set +x
 
 echo "These commands have been copied to dna/db/uploaded-user-data.log so that they can easily be copied and run on another system/deployment"
 
