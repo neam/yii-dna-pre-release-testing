@@ -129,9 +129,9 @@ echo "echo '$FOLDERPATH' > dna/db/migration-base/$DATA/media.folderpath" | tee -
 echo "" | tee -a $dna_path/db/uploaded-user-data.log
 
 # Set the contents by running the commands
-echo '$SCHEMA_FILEPATH' > $dna_path/db/migration-base/$DATA/schema.filepath
-echo '$DATA_FILEPATH' > $dna_path/db/migration-base/$DATA/data.filepath
-echo '$FOLDERPATH' > $dna_path/db/migration-base/$DATA/media.folderpath
+echo $SCHEMA_FILEPATH > $dna_path/db/migration-base/$DATA/schema.filepath
+echo $DATA_FILEPATH > $dna_path/db/migration-base/$DATA/data.filepath
+echo $FOLDERPATH > $dna_path/db/migration-base/$DATA/media.folderpath
 
 echo "These commands have been copied to dna/db/uploaded-user-data.log so that they can easily be copied and run on another system/deployment"
 
