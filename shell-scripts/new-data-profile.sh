@@ -40,5 +40,6 @@ echo "Data profile '$TO' is now available. Run reset-db.sh to make sure it works
 echo
 echo " Example:"
 echo "     export DATA=$TO"
+echo "     bin/ensure-db.sh"
 echo "     bin/reset-db.sh"
 echo "     bin/upload-current-user-data.sh"
