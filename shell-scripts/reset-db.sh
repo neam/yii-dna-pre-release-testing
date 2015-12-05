@@ -106,8 +106,13 @@ if [ "$DATA" == "clean-db" ]; then
 
 fi
 
-echo "* Running migrations" | tee -a $LOG
+echo "* Running legacy Yii migrations" | tee -a $LOG
 console/yii-dna-pre-release-testing-console migrate --connectionID=$connectionID --interactive=0 >> $LOG
+
+if [ -f "$dna_path/../bin/migrate-propel.sh" ]; then
+echo "* Running Propel migrations" | tee -a $LOG
+$dna_path/../bin/migrate-propel.sh >> $LOG
+fi
 
 echo "* Loading fixtures" | tee -a $LOG
 console/yii-dna-pre-release-testing-console fixture --connectionID=$connectionID load >> $LOG
