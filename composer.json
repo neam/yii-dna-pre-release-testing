@@ -15,6 +15,7 @@
     "bin": [
         "console/yii-dna-pre-release-testing-console",
         "shell-scripts/fetch-user-generated-data.sh",
+        "shell-scripts/new-data-profile.sh",
         "shell-scripts/post-release-user-generated-schema-to-clean-db-schema-routine.sh",
         "shell-scripts/reset-db.sh",
         "shell-scripts/reset-user-generated-files.sh",
