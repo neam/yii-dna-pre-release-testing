@@ -34,8 +34,9 @@ cd $script_path/..
 dna_path=$(pwd)/../../../dna
 
 # make app config available as shell variables
-php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh >> $LOG
-source /tmp/php-app-config.sh
+cd $dna_path/../
+source vendor/neam/php-app-config/shell-export.sh
+cd -
 
 # set media path
 media_path=/files/$DATA/media

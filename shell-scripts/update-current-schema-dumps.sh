@@ -7,9 +7,12 @@ dna_path=$(pwd)/../../../dna
 # fail on any error
 set -o errexit
 
+# make app config available as shell variables
+cd $dna_path/../
+source vendor/neam/php-app-config/shell-export.sh
+cd -
+
 # document the current database table defaults
-php $dna_path/../vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh > /dev/null
-source /tmp/php-app-config.sh
 mysqldump -h$DATABASE_HOST -P$DATABASE_PORT -u$DATABASE_USER --password=$DATABASE_PASSWORD --no-create-info --skip-triggers --no-data --databases $DATABASE_NAME > $dna_path/db/migration-results/$DATA/create-db.sql
 
 # dump the current schema
