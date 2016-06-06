@@ -24,11 +24,11 @@
         "shell-scripts/yiic-migrate.sh"
     ],
     "require": {
-        "php": ">=5.3.0",
-        "yiisoft/yii": "~1.1.15",
-        "yiiext/migrate-command": "dev-master#35f315b as 0.7.2.1",
+        "php": ">=5.4.0",
+        "yiisoft/yii": "~1.1.17",
+        "yiiext/migrate-command": "dev-master#35f315b as 0.7.2.1@dev",
         "sumwai/yii-fixture-helper": "@dev",
-        "motin/yii-consoletools": "dev-awaiting-prs",
+        "motin/yii-consoletools": "dev-awaiting-prs@dev",
         "neam/php-app-config": "dev-develop"
     },
     "require-dev": {
