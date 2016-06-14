@@ -66,14 +66,6 @@ fi
 # Clear current data
 cat shell-scripts/drop-all-tables-and-views.sql | mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME >> $LOG
 
-if [ "$connectionID" == "dbTest" ]; then
-    export DATABASE_HOST=$TEST_DB_HOST
-    export DATABASE_PORT=$TEST_DB_PORT
-    export DATABASE_USER=$TEST_DB_USER
-    export DATABASE_PASSWORD=$TEST_DB_PASSWORD
-    export DATABASE_NAME=$TEST_DB_NAME
-fi
-
 echo "* Setting schema character set and collation defaults" | tee -a $LOG
 if [ -f $dna_path/db/migration-base/$DATA/alter-schema-defaults.sql ]; then
     mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD < $dna_path/db/migration-base/$DATA/alter-schema-defaults.sql
