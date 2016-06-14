@@ -22,7 +22,7 @@ fi
 # fail on any error
 set -o errexit
 
-LOG=/tmp/reset-db.sh.log
+export LOG=/tmp/reset-db.sh.log
 
 echo "* Reset db started. Logging to $LOG" | tee -a $LOG
 
@@ -40,7 +40,7 @@ dna_path=$(pwd)/../../../dna
 # make app config available as shell variables
 cd $dna_path/../
 source vendor/neam/php-app-config/shell-export.sh
-cd -
+cd - >> $LOG
 
 if [ "$DATA" == "" ]; then
 
@@ -63,7 +63,7 @@ if [ "$DATA" != "clean-db" ]; then
 
 fi
 
-# Clear current data
+echo "* Dropping all tables and views" | tee -a $LOG
 cat shell-scripts/drop-all-tables-and-views.sql | mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME >> $LOG
 
 echo "* Setting schema character set and collation defaults" | tee -a $LOG
@@ -104,7 +104,7 @@ console/yii-dna-pre-release-testing-console migrate --connectionID=$connectionID
 
 if [ -f "$dna_path/../bin/migrate-propel.sh" ]; then
 echo "* Running Propel migrations" | tee -a $LOG
-$dna_path/../bin/migrate-propel.sh >> $LOG
+$dna_path/../bin/migrate-propel.sh
 fi
 
 echo "* Loading fixtures" | tee -a $LOG
