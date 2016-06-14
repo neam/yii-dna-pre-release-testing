@@ -64,7 +64,7 @@ if [ "$DATA" != "clean-db" ]; then
 fi
 
 # Clear current data
-console/yii-dna-pre-release-testing-console databaseschema --connectionID=$connectionID dropAllTablesAndViews --verbose=0 >> $LOG
+cat shell-scripts/drop-all-tables-and-views.sql | mysql -A --host=$DATABASE_HOST --port=$DATABASE_PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME >> $LOG
 
 if [ "$connectionID" == "dbTest" ]; then
     export DATABASE_HOST=$TEST_DB_HOST
