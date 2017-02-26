@@ -41,12 +41,12 @@ fi
 
 SCHEMA_FILEPATH=$FOLDER/$DATETIME/schema.sql
 
-if [ -f $dna_path/db/schema.sql ] ; then
-    rm $dna_path/db/schema.sql
+if [ -f $dna_path/db/$DATA.schema.sql ] ; then
+    rm $dna_path/db/$DATA.schema.sql
 fi
-console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=schema.sql --data=false --skip-triggers
-if [ ! -f $dna_path/db/schema.sql ] ; then
-    echo "The mysql dump is not found at the expected location: db/schema.sql"
+console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=$DATA.schema.sql --data=false --skip-triggers
+if [ ! -f $dna_path/db/$DATA.schema.sql ] ; then
+    echo "The mysql dump is not found at the expected location: db/$DATA.schema.sql"
     exit 1
 fi
 
@@ -54,18 +54,18 @@ fi
 
 DATA_FILEPATH=$FOLDER/$DATETIME/data.sql
 
-if [ -f $dna_path/db/data.sql ] ; then
-    rm $dna_path/db/data.sql
+if [ -f $dna_path/db/$DATA.data.sql ] ; then
+    rm $dna_path/db/$DATA.data.sql
 fi
-console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=data.sql --schema=false --compact=$COMPACT
-if [ ! -f $dna_path/db/data.sql ] ; then
-    echo "The mysql dump is not found at the expected location: db/data.sql"
+console/yii-dna-pre-release-testing-console mysqldump --connectionID=$connectionID --dumpPath=dna/db --dumpFile=$DATA.data.sql --schema=false --compact=$COMPACT
+if [ ! -f $dna_path/db/$DATA.data.sql ] ; then
+    echo "The mysql dump is not found at the expected location: db/$DATA.data.sql"
     exit 1
 fi
 
 echo "# Commands to run to use the dumped data and schema dumps locally:"
-echo "cp '$dna_path/db/data.sql' dna/db/migration-base/$DATA/"
-echo "cp '$dna_path/db/schema.sql' dna/db/migration-base/$DATA/"
+echo "cp '$dna_path/db/$DATA.data.sql' dna/db/migration-base/$DATA/data.sql"
+echo "cp '$dna_path/db/$DATA.schema.sql' dna/db/migration-base/$DATA/schema.sql"
 
 if [ "$1" == "--dump-only" ]; then
     exit 0;
@@ -73,17 +73,17 @@ fi
 
 # upload schema sql
 
-gzip -f $dna_path/db/schema.sql
+gzip -f $dna_path/db/$DATA.schema.sql
 SCHEMA_FILEPATH=$SCHEMA_FILEPATH.gz
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/schema.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$SCHEMA_FILEPATH"
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/$DATA.schema.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$SCHEMA_FILEPATH"
 
 echo $SCHEMA_FILEPATH > $dna_path/db/schema.filepath
 
 # upload data sql
 
-gzip -f $dna_path/db/data.sql
+gzip -f $dna_path/db/$DATA.data.sql
 DATA_FILEPATH=$DATA_FILEPATH.gz
-s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/data.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$DATA_FILEPATH"
+s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/$DATA.data.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$DATA_FILEPATH"
 
 echo $DATA_FILEPATH > $dna_path/db/data.filepath
 
