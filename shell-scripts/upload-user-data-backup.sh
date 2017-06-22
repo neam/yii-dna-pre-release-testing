@@ -77,7 +77,7 @@ gzip -f $dna_path/db/$DATA.schema.sql
 SCHEMA_FILEPATH=$SCHEMA_FILEPATH.gz
 s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/$DATA.schema.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$SCHEMA_FILEPATH"
 
-echo $SCHEMA_FILEPATH > $dna_path/db/schema.filepath
+echo $SCHEMA_FILEPATH > $dna_path/db/$DATA.schema.filepath
 
 # upload data sql
 
@@ -85,7 +85,7 @@ gzip -f $dna_path/db/$DATA.data.sql
 DATA_FILEPATH=$DATA_FILEPATH.gz
 s3cmd -v --config=/tmp/.user-generated-data.s3cfg put $dna_path/db/$DATA.data.sql.gz "$USER_GENERATED_DATA_S3_BUCKET/$DATA_FILEPATH"
 
-echo $DATA_FILEPATH > $dna_path/db/data.filepath
+echo $DATA_FILEPATH > $dna_path/db/$DATA.data.filepath
 
 # dump and upload user media
 
@@ -96,22 +96,22 @@ if [ "$(ls $media_path/)" ]; then
 else
     echo "Warning: No media files found" | tee -a $LOG
 fi
-echo $FOLDERPATH > $dna_path/db/media.folderpath
+echo $FOLDERPATH > $dna_path/db/$DATA.media.folderpath
 
 set +x
 
 echo
 echo "=== Upload finished ==="
 
-DATA_FILEPATH=$(cat $dna_path/db/data.filepath)
+DATA_FILEPATH=$(cat $dna_path/db/$DATA.data.filepath)
 echo "User generated db schema sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$DATA_FILEPATH"
 #echo "Set the contents of 'db/migration-base/$DATA/schema.filepath' to '$DATA_FILEPATH' in order to use this upload"
 
-SCHEMA_FILEPATH=$(cat $dna_path/db/schema.filepath)
+SCHEMA_FILEPATH=$(cat $dna_path/db/$DATA.schema.filepath)
 echo "User generated db data sql dump uploaded to $USER_GENERATED_DATA_S3_BUCKET/$SCHEMA_FILEPATH"
 #echo "Set the contents of 'db/migration-base/$DATA/data.filepath' to '$SCHEMA_FILEPATH' in order to use this upload"
 
-FOLDERPATH=$(cat $dna_path/db/media.folderpath)
+FOLDERPATH=$(cat $dna_path/db/$DATA.media.folderpath)
 echo "User media uploaded to $USER_GENERATED_DATA_S3_BUCKET/$FOLDERPATH"
 #echo "Set the contents of 'db/migration-base/$DATA/media.folderpath' to '$FOLDERPATH' in order to use this upload"
 echo
