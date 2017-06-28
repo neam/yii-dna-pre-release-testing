@@ -1,8 +1,8 @@
 {
-    "name": "neam/yii-dna-pre-release-testing",
-    "description": "Yii DNA Pre-Release Testing",
-    "keywords": ["php", "yii", "dna", "db", "versioning"],
-    "homepage": "https://github.com/neam/yii-dna-pre-release-testing",
+    "name": "neam/dna-project-base-data-set-management",
+    "description": "DNA Project Base Data Set Management",
+    "keywords": ["dna-project-base", "db", "versioning", "data-set", "management"],
+    "homepage": "https://github.com/neam/dna-project-base-data-set-management",
     "type": "library",
     "license": "BSD-3-Clause",
     "authors": [
