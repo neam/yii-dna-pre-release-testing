@@ -1,4 +1,4 @@
-Yii DNA Pre-Release Testing
+DNA Project Base Data Set Management
 ===========================
 
 Scripts and database migrations folder structure suited for release-upgrade testing with fake data and cloned real user data.
@@ -12,20 +12,12 @@ The "clean-db" data is saved in db/migration-base/clean-db/, the user-generated 
 User generated data is backed up to S3 by running a command specified in the readme. This includes the schema, table data and uploaded user media.
 
 ## Database migrations
-The migrations-folder should at any time contain the migrations necessary to migrate (separately) the clean-db schema and the user-generated schema to the schema necessary for the current revision.
-
-This ensures that release-upgrades can be tested before actual releases.
+Handled by Propel. 
 
 # DATA profiles
 Since there may be multiple independent databases deployed, one may keep track of them separately by creating data profiles. That is, instead of simply having "clean-db" and "user-generated" variants, we can create any new dataset and call it for instance "customer1" to be able to track the data set of that particular customer-deployment. 
 
 ## FAQ
-
-### How are new migrations created?
-
-    vendor/bin/yii-dna-pre-release-testing-console migrate create migration_foo
-
-This puts the empty migration files in the common migrations dir. If you need a migration only for clean-db or only for user-generated you'll need to move it.
 
 ### How are new DATA profiles added?
 
