@@ -1,6 +1,8 @@
 DNA Project Base Data Set Management
 ===========================
 
+**MIGRATION NOTICE: Repository migrated to [https://github.com/neam/dna-project-base-data-set-management]()**
+
 Scripts and database migrations folder structure suited for release-upgrade testing with fake data and cloned real user data.
 
 ## Rationale and definitions
