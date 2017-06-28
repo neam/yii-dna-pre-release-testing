@@ -1,0 +1,328 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "11e596ab2cd56e9d41bacc3731d4e6d9",
+    "packages": [
+        {
+            "name": "motin/yii-consoletools",
+            "version": "dev-awaiting-prs",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/motin/yii-consoletools.git",
+                "reference": "f3f1c94f91378c4cbe6f4d6e8bc434c64ff83a69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/motin/yii-consoletools/zipball/f3f1c94f91378c4cbe6f4d6e8bc434c64ff83a69",
+                "reference": "f3f1c94f91378c4cbe6f4d6e8bc434c64ff83a69",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "behaviors/",
+                    "commands/",
+                    "helpers/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Christoffer Niska",
+                    "email": "christoffer.niska@gmail.com",
+                    "homepage": "http://www.cniska.net/"
+                }
+            ],
+            "description": "A collection of tools for developing console commands for Yii.",
+            "keywords": [
+                "console",
+                "tools",
+                "yii"
+            ],
+            "time": "2015-03-16 12:21:14"
+        },
+        {
+            "name": "neam/php-app-config",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neam/php-app-config.git",
+                "reference": "c32cb86039899c525a6a326914d2c7d5d690e0e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neam/php-app-config/zipball/c32cb86039899c525a6a326914d2c7d5d690e0e9",
+                "reference": "c32cb86039899c525a6a326914d2c7d5d690e0e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "vlucas/phpdotenv": "v1.0.8"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "helpers/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fredrik Wollsén",
+                    "email": "fredrik@neam.se",
+                    "homepage": "http://www.neam.se"
+                }
+            ],
+            "description": "A PHP framework-agnostic approach to make the current [config](http://12factor.net/config) available to PHP applications and shell-scripts.",
+            "homepage": "https://github.com/neam/php-app-config",
+            "keywords": [
+                "12factor",
+                "config",
+                "php"
+            ],
+            "time": "2015-03-30 09:58:45"
+        },
+        {
+            "name": "sumwai/yii-fixture-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/motin/yii-fixture-helper.git",
+                "reference": "57fa2d2c8184aa62b9d0257f28120a5aec8ca9e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/motin/yii-fixture-helper/zipball/57fa2d2c8184aa62b9d0257f28120a5aec8ca9e3",
+                "reference": "57fa2d2c8184aa62b9d0257f28120a5aec8ca9e3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sum-Wai Low"
+                }
+            ],
+            "description": "FixtureHelper is a command application lets you work with your fixtures outside testing.",
+            "time": "2014-03-19 14:30:02"
+        },
+        {
+            "name": "vlucas/phpdotenv",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/phpdotenv.git",
+                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
+                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Dotenv": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "homepage": "http://github.com/vlucas/phpdotenv",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2014-10-14 15:06:44"
+        },
+        {
+            "name": "yiiext/migrate-command",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiiext/migrate-command.git",
+                "reference": "35f315b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiiext/migrate-command/zipball/9191b9b6624620c3c6a41f0867e06f22e2c77004",
+                "reference": "35f315b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0",
+                "yiisoft/yii": "1.1.*"
+            },
+            "type": "yii-extension",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc"
+                }
+            ],
+            "description": "This is an enhanced version of the Yii Database Migration Tool that adds module support and many more usefull features.",
+            "homepage": "https://github.com/yiiext/migrate-command",
+            "keywords": [
+                "database-migration",
+                "extension",
+                "yii"
+            ],
+            "time": "2013-05-09 15:14:47"
+        },
+        {
+            "name": "yiisoft/yii",
+            "version": "1.1.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii.git",
+                "reference": "bca0420b6799b0b2a7966aa90bcd15cb4aa73563"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii/zipball/bca0420b6799b0b2a7966aa90bcd15cb4aa73563",
+                "reference": "bca0420b6799b0b2a7966aa90bcd15cb4aa73563",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "bin": [
+                "framework/yiic"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "framework/YiiBase.php",
+                    "framework/yii.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Wei Zhuo",
+                    "email": "weizhuo@gmail.com",
+                    "role": "Project site maintenance and development"
+                },
+                {
+                    "name": "Sebastián Thierer",
+                    "email": "sebas@artfos.com",
+                    "role": "Component development"
+                },
+                {
+                    "name": "Jeffrey Winesett",
+                    "email": "jefftulsa@gmail.com",
+                    "role": "Documentation and marketing"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii Web Programming Framework",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "framework",
+                "yii"
+            ],
+            "time": "2014-12-21 19:30:17"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [
+        {
+            "alias": "0.7.2.1",
+            "alias_normalized": "0.7.2.1",
+            "version": "9999999-dev",
+            "package": "yiiext/migrate-command"
+        }
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "yiiext/migrate-command": 20,
+        "sumwai/yii-fixture-helper": 20,
+        "motin/yii-consoletools": 20,
+        "neam/php-app-config": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": []
+}

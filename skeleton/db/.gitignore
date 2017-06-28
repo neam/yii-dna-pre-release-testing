@@ -1,0 +1,4 @@
+/migration-base/user-generated/schema.sql
+/migration-base/user-generated/data.sql
+/migration-base/user-generated/media
+/migration-results/user-generated/data.sql

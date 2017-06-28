@@ -1,0 +1,36 @@
+{
+    "name": "neam/yii-dna-pre-release-testing",
+    "description": "Yii DNA Pre-Release Testing",
+    "keywords": ["php", "yii", "dna", "db", "versioning"],
+    "homepage": "https://github.com/neam/yii-dna-pre-release-testing",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Fredrik Wollsén",
+            "email": "fredrik@neam.se",
+            "homepage": "http://www.neam.se"
+        }
+    ],
+    "bin": [
+        "console/yii-dna-pre-release-testing-console",
+        "shell-scripts/fetch-user-generated-data.sh",
+        "shell-scripts/new-data-profile.sh",
+        "shell-scripts/post-release-user-generated-schema-to-clean-db-schema-routine.sh",
+        "shell-scripts/reset-db.sh",
+        "shell-scripts/reset-user-generated-files.sh",
+        "shell-scripts/update-current-schema-dumps.sh",
+        "shell-scripts/upload-user-data-backup.sh",
+        "shell-scripts/yiic-migrate.sh"
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii": "~1.1.17",
+        "yiiext/migrate-command": "dev-master#35f315b as 0.7.2.1@dev",
+        "sumwai/yii-fixture-helper": "@dev",
+        "motin/yii-consoletools": "dev-awaiting-prs@dev",
+        "neam/php-app-config": "dev-develop"
+    },
+    "require-dev": {
+    }
+}
