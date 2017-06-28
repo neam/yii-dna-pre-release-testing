@@ -18,7 +18,7 @@ set -o pipefail
 
 export LOG=/tmp/reset-db.sh.log
 
-echo "* Reset db started. Logging to $LOG" | tee -a $LOG
+echo "* Reset db (DATA=$DATA) started. Logging to $LOG" | tee -a $LOG
 
 # Show script name and line number when errors occur to make errors easier to debug
 trap 'echo "
